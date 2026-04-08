@@ -66,14 +66,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function setDefaultWebAuthnButtonState() {
-  if (!btnText) {
-    return;
-  }
 
   const button = document.getElementById("webauthn-button");
   button.onclick = executeWebAuthn;
-
-  button.innerText = decodeURI(btnText);
+  if (btnText) {
+    button.innerText = decodeURI(btnText);
+  }
 
   // reset back to default button state
   button.classList.remove(...disabledBtnClasses);
@@ -81,11 +79,10 @@ function setDefaultWebAuthnButtonState() {
 }
 
 function setAwaitingInteractionWebAuthnButtonState() {
-  if (!btnAwaitingInteractionText) {
-    return;
-  }
   const button = document.getElementById("webauthn-button");
-  button.innerText = decodeURI(btnAwaitingInteractionText);
+  if (!btnAwaitingInteractionText) {
+    button.innerText = decodeURI(btnAwaitingInteractionText);
+  }
   button.onclick = null;
 
   button.classList.remove(...enabledBtnClasses);
